@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	*{
+		margin:0px;
+		padding:0px;
+		box-sizing: border-box;
+	}
+	body{
+		font-family: sans-serif;
+		padding-top: 150px;
+		background:#000;
+	}
+	.main{
+		margin: auto;
+		width: 50%;
+	}
+	.main input,button{
+		width:75%;
+		border:2px solid white;
+		border-right:0px;
+		font-size: 18px;
+		padding:12px;
+		background-color: transparent;
+		color:white;
+	}
+	.main input:hover{
+		opacity: .8;
+	}
+	.main button{
+		width:25%;
+		background-color: #eee;
+		color:black;
+		transition: all 0.3s;
+		float: right;
+		border-left:0px;
+	}
+	.main button:hover{
+		opacity: .8;
+	}
+</style>
+</head>
+<body>
+	<div class="main">
+        <form action="search1.php" method="post" >
+		<input type="text" name="Search" placeholder="Enter the name...">
+		<button name="submit" >SEARCH</button>
+        </form>
+	</div>
+</body>
+</html>
+
+<?php
+
+$servername="127.0.0.1:3307";
+$username="root";
+$password="";
+$dbname="pbl1";
+
+$conn = new mysqli($servername,$username,$password,$dbname);
+if($conn->connect_error){
+die("connection failed : ");
+
+}
+if(isset($_POST["submit"])){
+    $str=$_POST["search"];
+    $sth=$conn->prepare("select * from 'criminal' where name='$str'");
+
+    $sth->setFetchMode(PDO :: fetch_B=OBJ);
+    $sth->execute();
+    if($row = $sth->fetch()){
+        ?>
+        <br><br><br>
+        <table>
+            <tr>
+                
+                <th>station</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                
+                <td><?php echo $row->station; ?></td>
+                <td><?php echo $row->name; ?></td>
+            </tr>
+        </table>
+        <?php
+    }
+   
+    else{
+        echo "name not exist";
+    }
+}
+
+?>
