@@ -224,7 +224,7 @@ html {
                <span class="fas fa-caret-down first"></span>
                </a>
                <ul class="feat-show">
-                  <li><a href="addfir.php">ADD FIR</a></li>
+                  <li><a href="addfir.php">ADD FIR to</a></li>
                   <li><a href="display.php">VIEW FIR</a></li>
                   <li><a href="delete.php">DELETE FIR</a></li>
                    <li><a href="update.php">UPDATE FIR</a></li>
